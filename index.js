@@ -12,18 +12,16 @@ app.use(cors())
 
 dotenv.config()
 
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 const URI = process.env.MongoDBURI;
 
-try {
-    mongoose.connect(URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+mongoose.connect(URI)
+    .then(() => {
+        console.log("Connected to MongoDb");
+    })
+    .catch((error) => {
+        console.error("Error connecting to MongoDb", error);
     });
-    console.log("Connected to MongoDb")
-} catch (error) {
-    console.log("Error", error);
-}
 
 // SignUp
 app.post('/signup', (req, res) => {
@@ -58,6 +56,6 @@ app.post('/contact', (req, res) => {
 
 
 
-app.listen(PORT, () => {
-    console.log(`Server is running at port ${PORT}`);
+app.listen(port, () => {
+    console.log(`Server is running at port ${port}`);
 })
