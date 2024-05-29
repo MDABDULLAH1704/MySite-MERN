@@ -13,15 +13,19 @@ app.use(cors())
 dotenv.config()
 
 const port = process.env.PORT || 3001;
-const URI = process.env.MongoDBURI;
+const URI = process.env.MongoDB_URI;
 
-mongoose.connect(URI)
-    .then(() => {
-        console.log("Connected to MongoDb");
-    })
-    .catch((error) => {
-        console.error("Error connecting to MongoDb", error);
-    });
+try {
+    mongoose.connect(URI, {});
+    console.log("Connected to MongoDb")
+} catch (error) {
+    console.log("Error", error);
+}
+
+// API Creation 
+app.get("/", (req, res) => {
+    res.send("Express App is Running");
+})
 
 // SignUp
 app.post('/signup', (req, res) => {
