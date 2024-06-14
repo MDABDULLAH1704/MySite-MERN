@@ -12,7 +12,7 @@ app.use(cors())
 
 dotenv.config()
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 const URI = process.env.MongoDB_URI;
 
 try {
